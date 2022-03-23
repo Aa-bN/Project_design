@@ -30,8 +30,8 @@ val_data.check()
 print("Dataset ready.")
 
 # 加载数据
-train_dataloader = DataLoader(dataset=train_data, batch_size=2, shuffle=False, collate_fn=collate_fn)
-val_dataloader = DataLoader(dataset=val_data, batch_size=2, shuffle=False, collate_fn=collate_fn)
+train_dataloader = DataLoader(dataset=train_data, batch_size=4, shuffle=False, collate_fn=collate_fn)
+val_dataloader = DataLoader(dataset=val_data, batch_size=4, shuffle=False, collate_fn=collate_fn)
 print("DataLoader ready.")
 
 # 创建模型
