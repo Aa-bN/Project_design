@@ -60,7 +60,7 @@ if __name__ == '__main__':
     total_train_step = 0
     total_val_step = 0
     min_loss_per_epoch = 0  # for validation
-    a = {}                  # record the best model's epoch
+    a = {'min_loss_epoch': 0}                  # record the best model's epoch
 
     for k in range(epoch):
         print("Epoch {} Started...".format(k))
@@ -91,7 +91,7 @@ if __name__ == '__main__':
             total_train_step += 1
 
             if total_train_step % 100 == 0:
-                print("Train_Epoch:{}, Step:{}, single_loss:{}".format(epoch, total_train_step, loss.item()))
+                print("Train_Epoch:{}, Step:{}, single_loss:{}".format(k, total_train_step, loss.item()))
 
         print("Validating...")
         # val
@@ -109,7 +109,7 @@ if __name__ == '__main__':
                 total_val_step += 1
 
                 if total_val_step % 50 == 0:
-                    print("Val_Epoch:{}, Step:{}, single_loss:{}".format(epoch, total_val_step, loss.item()))
+                    print("Val_Epoch:{}, Step:{}, single_loss:{}".format(k, total_val_step, loss.item()))
 
         if epoch == 0:
             min_loss_per_epoch = val_loss_per_epoch
@@ -119,7 +119,7 @@ if __name__ == '__main__':
             a["min_loss_epoch"] = k
             torch.save(fcnNet, './model/fcnNet_best.pth')
 
-        print("Epoch {} Over. Min_loss is {}, from Epoch {}.".format(k, min_loss_per_epoch.item(), a['min_loss_epoch']))
+        print("Epoch {} Over. Min_loss is {}, from Epoch {}.".format(k, min_loss_per_epoch, a['min_loss_epoch']))
 
         if k == epoch-1:
             torch.save(fcnNet, "./model/fcnNet_last.pth")
